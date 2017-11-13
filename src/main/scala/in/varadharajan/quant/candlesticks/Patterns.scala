@@ -4,7 +4,7 @@ sealed trait Sentiment
 
 sealed trait BullishSentiment extends Sentiment
 
-sealed trait NeutralSentiment extends Sentiment
+sealed trait UnclearSentiment extends Sentiment
 
 sealed trait BearishSentiment extends Sentiment
 
@@ -20,13 +20,20 @@ object SingleCandlePatterns {
   patternList.filter(x => x.applicable(candle))
 
   private def patternList: Iterable[SingleCandlePattern] = List(
-  Doji
+    Doji,
+    Hammer
   )
 }
 
-case object Doji extends SingleCandlePattern with NeutralSentiment {
+case object Doji extends SingleCandlePattern with UnclearSentiment {
   override def applicable(candle: Candle): Boolean =
     candle.spreadRatio <= 0.1 &&
-      candle.highWick >= candle.spread &&
-      candle.lowWick >= candle.spread()
+      candle.highWick / candle.spreadWithWicks >= 0.3 &&
+      candle.lowWick / candle.spreadWithWicks >= 0.3
+}
+
+case object Hammer extends SingleCandlePattern with UnclearSentiment {
+  override def applicable(candle: Candle): Boolean =
+    candle.spreadRatio <= 0.1 && (
+      (candle.highWick / candle.spreadWithWicks <= 0.3) || (candle.lowWick / candle.spreadWithWicks <= 0.3))
 }
