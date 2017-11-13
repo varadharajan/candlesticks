@@ -8,5 +8,8 @@ lazy val root = (project in file(".")).
       version      := "0.1.0-SNAPSHOT"
     )),
     name := "candlesticks",
-    libraryDependencies += scalaTest % Test
+    libraryDependencies += "com.github.nscala-time" %% "nscala-time" % "2.18.0",
+
+    libraryDependencies += scalaTest % Test,
+    libraryDependencies += "org.scalacheck" %% "scalacheck" % "1.13.4" % "test"
   )
