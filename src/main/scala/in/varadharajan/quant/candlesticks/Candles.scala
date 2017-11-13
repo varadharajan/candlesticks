@@ -11,6 +11,7 @@ object Types {
 sealed trait CandleColour
 
 case object Red extends CandleColour
+
 case object Green extends CandleColour
 
 sealed trait CandleTrait {
@@ -26,11 +27,11 @@ sealed trait CandleTrait {
 
   def timestamp: DateTime
 
-  def spread(): Double = close - open
+  def spread(): Double = Math.abs(close - open)
 
   def spreadWithWicks(): Double = high - low
 
-  def colour: CandleColour = if(open > close) Red else Green
+  def colour: CandleColour = if (open > close) Red else Green
 }
 
 case class Candle(open: PricePoint,

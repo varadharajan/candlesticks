@@ -6,7 +6,7 @@ import org.scalatest.{FlatSpec, Matchers}
 class CandleTest extends FlatSpec with Matchers {
   "spread" should "return the difference between close and open" in {
     Candle(100, 110, 90, 105, 1000, DateTime.now()).spread shouldBe 5
-    Candle(100, 110, 90, 95, 1000, DateTime.now()).spread shouldBe -5
+    Candle(100, 110, 90, 95, 1000, DateTime.now()).spread shouldBe 5
   }
 
   "spreadWithWicks" should "return the difference between high and low" in {
