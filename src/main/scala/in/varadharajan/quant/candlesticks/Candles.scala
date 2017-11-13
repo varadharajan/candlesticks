@@ -27,7 +27,13 @@ sealed trait CandleTrait {
 
   def timestamp: DateTime
 
+  def highWick(): Double = Math.abs(high - Math.max(open, close))
+
+  def lowWick(): Double = Math.abs(low - Math.min(open, close))
+
   def spread(): Double = Math.abs(close - open)
+
+  def spreadRatio(): Double = spread / spreadWithWicks
 
   def spreadWithWicks(): Double = high - low
 
