@@ -35,7 +35,8 @@ object TwoCandlePatterns {
     patternList.filter(x => x.applicable(left, right))
 
   private def patternList: Iterable[TwoCandlePattern] = List(
-    BearishEngulfing
+    BearishEngulfing,
+    BullishEngulfing
   )
 }
 
